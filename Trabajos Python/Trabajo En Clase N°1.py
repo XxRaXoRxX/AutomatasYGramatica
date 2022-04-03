@@ -1,6 +1,6 @@
-#Autómatas y Grámaticas -Universidad de Mendoza-
+#Autómatas y Gramáticas -Universidad de Mendoza-
 #Alumnos: Marcos Miglierina - Alexis Lino
-# Trabajo Práctico N°1
+# Trabajo en Clase N°1
 
 import re
 
