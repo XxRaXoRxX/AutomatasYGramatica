@@ -14,9 +14,7 @@ def Ejercicio1(loop):
     return retorno
 
 def Estado1EJ1(retorno):
-    random = r.random()
-
-    if(random <= 0.5):
+    if(getRandomValue()):
         retorno += "a"
     else:
         retorno += "b"
@@ -33,30 +31,30 @@ def Ejercicio2(loop):
     return retorno
 
 def Estado1EJ2(retorno):
-    random = r.random()
-    if(random <= 0.5):
+    if(getRandomValue()):
         retorno += "aa"
     else:
         retorno += "b"
 
-    random = r.random()
-    if(random <= 0.5):
+    if(getRandomValue()):
         return Estado2EJ2(retorno = retorno)
     else:
         return retorno
 
 def Estado2EJ2(retorno):
-    random = r.random()
-    if(random <= 0.5):
+    if(getRandomValue):
         retorno += "ab"
     else:
         retorno += "bb"
 
-    random = r.random()
-    if(random <= 0.5):
+    if(getRandomValue()):
         return retorno
     else:
         return Estado1EJ2(retorno = retorno)
+
+def getRandomValue():
+    random = r.random()
+    return random <= 0.5
 
 # loop: Es la cantidad de loopeo que ejecuto dentro del automata.
 print(Ejercicio1(8))
