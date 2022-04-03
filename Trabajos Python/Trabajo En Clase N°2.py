@@ -59,4 +59,5 @@ def Estado2EJ2(retorno):
         return Estado1EJ2(retorno = retorno)
 
 # loop: Es la cantidad de loopeo que ejecuto dentro del automata.
+print(Ejercicio1(8))
 print(Ejercicio2(8))
