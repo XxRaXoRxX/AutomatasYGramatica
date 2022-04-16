@@ -10,8 +10,8 @@ def Ejercicio2(input):
 
         if (estado == 6):
             print("Estado 6: caracter", caracter)
-            if not (i == (len(input) - 1)):
-                next = input[i + 1]
+    
+            next = FindNextValue(list = input, i = i, plus = 1)
 
             if (caracter == "a"):
                 if (next == "a"):
@@ -20,6 +20,7 @@ def Ejercicio2(input):
                 else:
                     estado = 12
                     print ("Pasamos de estado 6 a 7 a 8 a 12")
+            
             if (caracter == "b"):
                 if (next == "b"):
                     estado = 10
@@ -28,12 +29,32 @@ def Ejercicio2(input):
                 else:
                     estado = 0
                     print("Pasamos de estado 6 a 0")
+            
+            if (caracter == " "):
+                next2 = FindNextValue(list = input, i = i, plus = 2)
 
-            if (i == (len(input) - 1)):
-                print("Estado de Finalización 6")
+                if (next == "a"):
+                    if (next2 == "a"):
+                        estado = 0
+                        print("Pasamos de estado 6 a 0")
+                        continue;
+                    else:
+                        print("Error, la entrada no es correcta.")
+                elif (next == "b"):
+                    if (next2 == 0):
+                        estado = 0
+                        print("Pasamos de estado 6 a 0")
+                        continue;
+                    else:
+                        print("Error, la entrada no es correcta.")
+                else:
+                    estado = 12
+                    print("Pasamos de estado 6 a 12")
         
         if (estado == 0):
             print("Estado 0", "caracter:", caracter)
+
+            next = FindNextValue(list = input, i = i, plus = 1)
 
             if (caracter == "a"):
                 estado = 2
@@ -42,6 +63,12 @@ def Ejercicio2(input):
             elif (caracter == "b"):
                 estado = 6
                 print("Pasamos de estado 4 a 5 a 6")
+
+                if (next == 0):
+                    print("Estado de Finalización: 6")
+            elif (caracter == " "):
+                estado = 6
+                print("Pasamos de estado 0 a 6")
             else:
                 print("Error, letra no encontrada", caracter)
                 return
@@ -65,14 +92,24 @@ def Ejercicio2(input):
                 return
 
         if (estado == 12):
-            if (i == (len(input) - 1)):
+            print("Estado 12: caracter", caracter)
+
+            next = FindNextValue(list = input, i = i, plus = 1)
+
+            if (next == 0):
                 print("Estado de Finalización 12")
                 return
+            elif (next == " "):
+                continue
 
             estado = 6
             print("Pasamos de estado 12 a 6")
             
-
+def FindNextValue(list, i, plus):
+    try:
+        return list[i + plus]
+    except:
+        return 0
 
 valor = str(input("Ingresar input: "))
 Ejercicio2(input = valor)
