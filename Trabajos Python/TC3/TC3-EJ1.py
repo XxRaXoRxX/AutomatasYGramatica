@@ -1,14 +1,14 @@
 #Autómatas y Gramáticas -Universidad de Mendoza-
 #Alumnos: Marcos Miglierina - Alexis Lino
 # Trabajo en Clase N°3 - Ejercicio N°1: (a|b)*
-string = str(input("Ingrese la expresión regular a analizar: "))
 
-def Ej3(string):
+def Ej1(string):
     #Estado A es el estado 0(inicial), Estado 2 es B y el estado 3 es C.
     estado = 1
 
     for i in(string):
 
+        #Estado A
         if estado == 1:
 
             if i == "a":
@@ -27,6 +27,7 @@ def Ej3(string):
                 estado = 0
                 return
 
+        #Estado B
         if estado == 2:
 
             if i == "a":
@@ -43,7 +44,8 @@ def Ej3(string):
                 print("Caracter incorrecto en la cadena. Saliendo...")
                 estado = 0
                 return
-        
+
+        #Estado C     
         if estado == 3:
 
             if i == "b":
@@ -61,4 +63,7 @@ def Ej3(string):
                 estado = 0
                 return
         
-        print("Estado de finalización: ", estado)
+    print("Estado de finalización: ", estado)
+
+string = str(input("Ingrese la expresión regular a analizar: "))
+Ej1(string)

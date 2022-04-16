@@ -57,10 +57,10 @@ def Ejercicio2(input):
         if (estado == 3):
             print("Estado D", "caracter:", caracter)
             if (caracter == "a"):
-                estado =CambioEstado(actual = estado, cambio = estado, sigValor = sigValor)
+                estado = CambioEstado(actual = estado, cambio = estado, sigValor = sigValor)
                 continue
             elif (caracter == "b"):
-                estado =CambioEstado(actual = estado, cambio = 2, sigValor = sigValor)
+                estado = CambioEstado(actual = estado, cambio = 2, sigValor = sigValor)
                 continue
             else:
                 Error(caracter = caracter)
@@ -70,10 +70,10 @@ def Ejercicio2(input):
         if (estado == 4):
             print("Estado E", "caracter:", caracter)
             if (caracter == "a"):
-                estado =CambioEstado(actual = estado, cambio = 4, sigValor = sigValor)
+                estado = CambioEstado(actual = estado, cambio = 4, sigValor = sigValor)
                 continue
             elif (caracter == "b"):
-                estado =CambioEstado(actual = estado, cambio = 2, sigValor = sigValor)
+                estado = CambioEstado(actual = estado, cambio = 2, sigValor = sigValor)
                 continue
             else:
                 Error(caracter = caracter)
