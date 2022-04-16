@@ -14,6 +14,7 @@ def Ejercicio2(input):
         except:
             sigValor = 0
 
+        #Estado A
         if (estado == 0):
             print("Estado A", "caracter:", caracter)
             if (caracter == "a"):
@@ -26,6 +27,7 @@ def Ejercicio2(input):
                 Error(caracter = caracter)
                 return
             
+        #Estado B
         if (estado == 1):
             print("Estado B", "caracter:", caracter)
             if (caracter == "a"):
@@ -38,6 +40,7 @@ def Ejercicio2(input):
                 Error(caracter = caracter)
                 return
 
+        #Estado C
         if (estado == 2):
             print("Estado C", "caracter:", caracter)
             if (caracter == "a"):
@@ -50,6 +53,7 @@ def Ejercicio2(input):
                 Error(caracter = caracter)
                 return
 
+        #Estado D
         if (estado == 3):
             print("Estado D", "caracter:", caracter)
             if (caracter == "a"):
@@ -62,6 +66,7 @@ def Ejercicio2(input):
                 Error(caracter = caracter)
                 return
 
+        #Estado E
         if (estado == 4):
             print("Estado E", "caracter:", caracter)
             if (caracter == "a"):
