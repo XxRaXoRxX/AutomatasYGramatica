@@ -1,26 +1,64 @@
 #Autómatas y Gramáticas -Universidad de Mendoza-
 #Alumnos: Marcos Miglierina - Alexis Lino
 # Trabajo en Clase N°3 - Ejercicio N°1: (a|b)*
+string = str(input("Ingrese la expresión regular a analizar: "))
 
-def Ejercicio1(input):
-    estado = "A"
+def Ej3(string):
+    #Estado A es el estado 0(inicial), Estado 2 es B y el estado 3 es C.
+    estado = 1
 
-    for i in range(len(input)):
-        caracter = input[i]
+    for i in(string):
 
-        if (estado == "A"):
-            print("Estado A", "caracter:", caracter)
+        if estado == 1:
+
+            if i == "a":
+
+                print("Pasamos del estado 1, al estado 2.")
+                estado = 2
             
+            elif i == "b":
+
+                print("Pasamos del estado 1, al estado 3.")
+                estado = 3
             
-        if (estado == "B"):
-            print("Estado B", "caracter:", caracter)
+            else:
 
+                print("Caracter incorrecto en la cadena. Saliendo...")
+                estado = 0
+                return
+
+        if estado == 2:
+
+            if i == "a":
+
+                print("Estamos en el estado 2, con un caracter a")
+
+            elif i == "b":
+
+                print("Pasamos del estado 2 a estado 3.")
+                estado = 3
             
-        if (estado == "C"):
-            print("Estado C", "caracter:", caracter)
+            else:
 
+                print("Caracter incorrecto en la cadena. Saliendo...")
+                estado = 0
+                return
+        
+        if estado == 3:
 
+            if i == "b":
+
+                print("Estamos en el estado 3, con un caracter b")
             
+            elif i ==  "a":
 
-valor = str(input("Ingresar input: "))
-Ejercicio1(input = valor)
+                print("Pasamos del estado 3 al estado 2.")
+                estado = 2
+            
+            else:
+
+                print("Caracter incorrecto en la cadena. Saliendo...")
+                estado = 0
+                return
+        
+        print("Estado de finalización: ", estado)
