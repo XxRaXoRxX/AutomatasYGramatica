@@ -10,7 +10,8 @@ def Ejercicio2(input):
 
         if (estado == 6):
             print("Estado 6: caracter", caracter)
-            next = input[i + 1]
+            if not (i == (len(input) - 1)):
+                next = input[i + 1]
 
             if (caracter == "a"):
                 if (next == "a"):
