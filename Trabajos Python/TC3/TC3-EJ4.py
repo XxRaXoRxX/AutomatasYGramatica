@@ -1,6 +1,6 @@
 #Autómatas y Gramáticas -Universidad de Mendoza-
 #Alumnos: Marcos Miglierina - Alexis Lino
-# Trabajo en Clase N°3 - Ejercicio N°4: (a|b)*(abb)
+# Trabajo en Clase N°3 - Ejercicio N°4: (a|b)*abb
 
 def Ejercicio1(input):
     estado = "A"
