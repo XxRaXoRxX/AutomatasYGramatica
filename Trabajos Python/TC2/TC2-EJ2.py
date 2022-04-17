@@ -50,6 +50,9 @@ def Ejercicio2(input):
                 else:
                     estado = 12
                     print("Pasamos de estado 6 a 12")
+            else:
+                print("Error, letra no encontrada", caracter)
+                return
         
         if (estado == 0):
             print("Estado 0", "caracter:", caracter)
@@ -99,8 +102,6 @@ def Ejercicio2(input):
             if (next == 0):
                 print("Estado de Finalización 12")
                 return
-            elif (next == " "):
-                continue
 
             estado = 6
             print("Pasamos de estado 12 a 6")
