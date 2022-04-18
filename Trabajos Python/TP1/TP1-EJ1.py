@@ -6,8 +6,11 @@ import re
 import os
 
 class Constants():
-    DOMINIOS = ["outlook", "hotmail", "gmail", "yahoo", "live"]
-    PAISES = ["ru", "br", "sh", "mx", "cl"]
+    LETRAS = "[A-z]"
+    SIMBOLOS = "[-, _]"
+    NUMEROS = "[0-9]"
+    DOMINIOS = "[outlook, hotmail, gmail, yahoo, live]"
+    PAISES = "[ru, br, sh, mx, cl]"
     #ru : Rusia // br: Brazil // sh: Santa Helena // mx: Mexico // cl: Chile
 
 class Main():
@@ -50,10 +53,39 @@ class Main():
             print("El archivo ingresado no existe.")
             return
 
+        # Obtener lineas de archivo
         lines = archive.readlines()
 
-        print(lines[0][:-1])
+        #Traemos las constantes
+        cons = Constants()
 
+        for line in lines:
+            # Quitamos el /n al final del caracter
+            line = line[:-1]
+
+            # Verificamos si es valido.
+            # Verificamos si empieza con una letra
+            empiezaLetra = re.search(cons.LETRAS, line[0])
+            # Verificamos si tiene arroba.
+            arroba = re.search("@", line)
+            
+            if (empiezaLetra and arroba):
+                #Divido la parte del arroba
+                split = re.split("@", line)
+
+                #Verifico que tiene un solo arroba.
+                if (len(split) == 2):
+                    #Verifico si los dominios ingresados son correctos
+                    dominio = re.findall(cons.DOMINIOS, split[1])
+                    #Verifico si tiene el .com
+                    com = re.findall(".com", split[1])
+
+                    print(dominio, com)
+
+                    print("El correo ingresado es correcto:", line)
+                    continue
+            
+            print("El correo ingresado es incorrecto:", line)
 
 main = Main()
 main.main()
