@@ -45,7 +45,7 @@ def Ejercicio3():
 
         value = "#"
 
-        resultado = re.search(value, dato)
+        resultado = re.search(value, dato[0])
 
         if (dato == ""):
             break
@@ -84,7 +84,7 @@ def Ejercicio4():
             print("La cadena no inicia con número ni letra.")
 
 # Ejecución
-Ejercicio1()
-Ejercicio2()
+#Ejercicio1()
+#Ejercicio2()
 Ejercicio3()
-Ejercicio4()
+#Ejercicio4()

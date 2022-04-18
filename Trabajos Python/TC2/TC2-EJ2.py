@@ -21,7 +21,7 @@ def Ejercicio2(input):
                     estado = 12
                     print ("Pasamos de estado 6 a 7 a 8 a 12")
             
-            if (caracter == "b"):
+            elif (caracter == "b"):
                 if (next == "b"):
                     estado = 10
                     print("Pasamos de estado 6 a 9 a 10")
@@ -30,7 +30,7 @@ def Ejercicio2(input):
                     estado = 0
                     print("Pasamos de estado 6 a 0")
             
-            if (caracter == " "):
+            elif (caracter == " "):
                 next2 = FindNextValue(list = input, i = i, plus = 2)
 
                 if (next == "a"):
@@ -60,9 +60,16 @@ def Ejercicio2(input):
             next = FindNextValue(list = input, i = i, plus = 1)
 
             if (caracter == "a"):
-                estado = 2
-                print("Pasamos de estado 1 y 2")
-                continue
+                if (next == "a"):
+                    estado = 2
+                    print("Pasamos de estado 1 y 2")
+                    continue
+                elif (next == "b" or next == 0):
+                    estado = 6
+                    print("Pasamos de estado 0 a 6")
+                    estado = 12
+                    print("Pasamos estado 7 a 8 a 12")
+
             elif (caracter == "b"):
                 estado = 6
                 print("Pasamos de estado 4 a 5 a 6")

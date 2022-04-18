@@ -44,7 +44,7 @@ def Ejercicio2(input):
         if (estado == 2):
             print("Estado C", "caracter:", caracter)
             if (caracter == "a"):
-                estado = CambioEstado(actual = estado, cambio = 3, sigValor = sigValor)
+                estado = CambioEstado(actual = estado, cambio = 1, sigValor = sigValor)
                 continue
             elif (caracter == "b"):
                 estado = CambioEstado(actual = estado, cambio = 4, sigValor = sigValor)
