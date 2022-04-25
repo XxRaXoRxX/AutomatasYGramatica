@@ -7,10 +7,13 @@ import os
 
 class Constants():
     LETRAS = "[A-z]"
-    SIMBOLOS = "[-, _]"
+    #SIMBOLOS = "[- | _]"
     NUMEROS = "[0-9]"
-    DOMINIOS = "[outlook, hotmail, gmail, yahoo, live]"
-    PAISES = "[ru, br, sh, mx, cl]"
+    DOMINIOLIST = ["outlook", "hotmail", "gmail", "yahoo", "live"]
+    DOMINIOS = "|".join(DOMINIOLIST)
+    PAISES = "ru|br|sh|mx|cl"
+    PUNTO = "[.]"
+    COM = "com"
     #ru : Rusia // br: Brazil // sh: Santa Helena // mx: Mexico // cl: Chile
 
 class Main():
@@ -59,6 +62,10 @@ class Main():
         #Traemos las constantes
         cons = Constants()
 
+        #Printeamos los ejemplos que usamos.
+        print("Ejemplo de dominios:", cons.DOMINIOS)
+        print("Ejemplo de paises:", cons.PAISES)
+
         for line in lines:
             # Quitamos el /n al final del caracter
             line = line[:-1]
@@ -68,6 +75,7 @@ class Main():
             empiezaLetra = re.search(cons.LETRAS, line[0])
             # Verificamos si tiene arroba.
             arroba = re.search("@", line)
+            correcto = False
             
             if (empiezaLetra and arroba):
                 #Divido la parte del arroba
@@ -75,17 +83,46 @@ class Main():
 
                 #Verifico que tiene un solo arroba.
                 if (len(split) == 2):
-                    #Verifico si los dominios ingresados son correctos
-                    dominio = re.findall(cons.DOMINIOS, split[1])
-                    #Verifico si tiene el .com
-                    com = re.findall(".com", split[1])
+                    #Dividimos despues del arroba en dos o tres partes por puntos.
+                    split2 = re.split(cons.PUNTO, split[1])
 
-                    print(dominio, com)
-
-                    print("El correo ingresado es correcto:", line)
-                    continue
+                    if (len(split2) == 2):
+                        correcto = VerificarDominio(len = 2, cons = cons, split = split2)
+                    elif (len(split2) == 3):
+                        correcto = VerificarDominio(len = 3, cons = cons, split = split2)
             
-            print("El correo ingresado es incorrecto:", line)
+            if (correcto == True):
+                print("El correo ingresado es correcto:", line)
+            else:
+                print("El correo ingresado es incorrecto:", line)
+
+def VerificarDominio(len, cons, split):
+    """Verifico si el dominio es correcto.
+
+        args:
+                -len: Rango del dominio.
+                -cons: Constantes.
+                -split: Dominio en lista. 
+    """
+
+    dominio = re.fullmatch(cons.DOMINIOS, split[0])
+
+    com = re.fullmatch(cons.COM, split[1])
+
+    if (len == 3):
+        pais = re.fullmatch(cons.PAISES, split[2])
+
+        if (dominio != None and com != None and pais != None):
+            return True
+        else:
+            return False
+
+    else:
+        if (dominio != None and com != None):
+            return True
+        else:
+            return False
+
 
 main = Main()
 main.main()
