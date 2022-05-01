@@ -6,6 +6,8 @@ import re
 import os
 
 class Constants():
+    """Abecedario del Autómata."""
+    
     LETRAS = "[A-z]"
     #SIMBOLOS = "[- | _]"
     NUMEROS = "[0-9]"

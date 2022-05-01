@@ -6,6 +6,8 @@ import re
 import os
 
 class Constants():
+    """Abecedario del Autómata."""
+
     PROTOCOLO = "http|https" #No obligatorio
     WWW = "www" #No obligatorio
     COM = "com|com/" #obligatorio
@@ -79,9 +81,9 @@ class Main():
                 correcto = VerificarDominio(cons = cons, split = split[0])
 
             if (correcto == True):
-                print("La URL ingresado es correcto:", line)
+                print("La URL ingresada es correcto:", line)
             else:
-                print("La URL ingresado es incorrecto:", line)
+                print("La URL ingresada es incorrecto:", line)
 
 def VerificarDominio(cons, split):
     """Verifico si el dominio es correcto.

@@ -7,6 +7,8 @@ import re
 import os
 
 class Constants():
+    """Abecedario del Autómata."""
+
     UNDIGITO = "[0-9]"
     TRESDIGITOSPRIMERO = "[0-2]"
     TRESDIGITOSSEGTER = "[0-5]"
@@ -63,42 +65,92 @@ class Main():
             line = line[:-1]
 
             #Hacemos un split con un punto.
-            split = re.split(cons.PUNTOS, line)
+            split = re.split(cons.PUNTO, line)
 
-            correcto = False
+            correct = False
 
+            # Si el rango de la ip es de 4 bloques, ingrese, sino es una ip erronea.
             if (len(split) == 4):
-                correcto = VerificarIP(cons = cons, split = split)
+                correct = self.SplitBlock(cons = cons, split = split)
 
-            if (correcto == True):
-                print("La URL ingresado es correcto:", line)
+            if (correct == True):
+                print("La IPV4 ingresada es correcto:", line)
             else:
-                print("La URL ingresado es incorrecto:", line)
+                print("La IPV4 ingresada es incorrecto:", line)
 
-def VerificarIP(cons, split):
-    """Verifico si el dominio es correcto.
+    def SplitBlock(self,  cons, split):
+        """Verifico si el dominio es correcto.
 
-        args:
-                -cons: Constantes.
-                -split: Dominio en lista. 
-    """
+            args:
+                    -cons: Constantes.
+                    -split: Dominio en lista. 
+        """
 
-    for bloque in split:
+        for block in split:
 
-        for i in range(len(bloque)):
-            #num = re.search(cons., bloque[i])
-            pass
-    
-def VerificarProtocolo(cons, split):
-    """Verifico si el dominio es correcto.
+            correct = self.VerifyBlock(cons = cons, blockRange = len(block), block = block)
 
-    args:
-        -cons: Constantes.
-        -split: Dominio en lista. 
-    """
-    protocolo = re.fullmatch(cons.PROTOCOLO, split)
+            # Verifica si es correcto el bloque, en caso de que no, devuelve IP incorrecto.
+            if (correct == True):
+                continue
+            else:
+                return False
 
-    return protocolo != None
+        # Si todos los casos pasaron con exito, devuelve IP correcto.
+        return True
+
+    def VerifyBlock(self, cons, blockRange, block):
+        """Verifico si el bloque es correcto.
+
+            args:
+                    -cons: Constantes.
+                    -blockRange: Largo del bloque de uno de los cuatro bloques de la IP.
+                    -block: Uno de los bloques de la IP.
+        """
+
+        # Ejemplo 0.
+        if (blockRange == 1):
+            num = re.fullmatch(cons.UNDIGITO, block[0])
+
+            if (num != None):
+                return True
+            else:
+                return False
+
+        # Ejemplo 00.
+        elif (blockRange == 2):
+            num1 = re.fullmatch(cons.UNDIGITO, block[0])
+            num2 = re.fullmatch(cons.UNDIGITO, block[1])
+
+            if (num1 != None and num2 != None):
+                return True
+            else:
+                return False
+
+        # Ejemplo 000.
+        elif (blockRange == 3):
+            num1 = re.fullmatch(cons.TRESDIGITOSPRIMERO, block[0])
+
+            # En caso de ser vacio que retorne, sino se explota el codigo del num1.
+            if (num1 == None):
+                return False
+            
+            # Si el primer digito es 2, el segundo digito solo llega de 0 a 5, sino de 0 a 9.
+            if (num1.group() == "2"):
+                num2 = re.fullmatch(cons.TRESDIGITOSSEGTER, block[1])
+                num3 = re.fullmatch(cons.TRESDIGITOSSEGTER, block[2])
+            else:
+                num2 = re.fullmatch(cons.UNDIGITO, block[1])
+                num3 = re.fullmatch(cons.UNDIGITO, block[2])
+
+            if (num1 != None and num2 != None and num3 != None):
+                return True
+            else:
+                return False
+        
+        # Ejemplo cualquier otro devuelva error.
+        else:
+            return False
 
 main = Main()
 main.main()
