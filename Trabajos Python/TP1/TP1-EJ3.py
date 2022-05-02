@@ -136,9 +136,22 @@ class Main():
                 return False
             
             # Si el primer digito es 2, el segundo digito solo llega de 0 a 5, sino de 0 a 9.
+            # Verificar si el segundo no es 5 sino el tercero puede llegar al 9
             if (num1.group() == "2"):
-                num2 = re.fullmatch(cons.TRESDIGITOSSEGTER, block[1])
-                num3 = re.fullmatch(cons.TRESDIGITOSSEGTER, block[2])
+                num2 = re.fullmatch(cons.UNDIGITO, block[1])
+
+                try:
+                    num2INT = int(num2.group())
+                except:
+                    return False
+
+                if (num2INT == 5):
+                    num3 = re.fullmatch(cons.TRESDIGITOSSEGTER, block[2])
+                elif (num2INT < 5):
+                    num3 = re.fullmatch(cons.UNDIGITO, block[2])
+                else:
+                    return False
+
             else:
                 num2 = re.fullmatch(cons.UNDIGITO, block[1])
                 num3 = re.fullmatch(cons.UNDIGITO, block[2])

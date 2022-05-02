@@ -10,7 +10,9 @@ class Constants():
 
     PROTOCOLO = "http|https" #No obligatorio
     WWW = "www" #No obligatorio
-    COM = "com|com/" #obligatorio
+    DOMINIO = "com|net|gob|us|fr" #obligatorio
+    DOMINIOBARRA = "com/|net/|gob/|us/|fr/"
+    PAIS = "ru|br|sh|mx|cl"
     PUNTO = "[.]"
     SEPARADOR = "://"
 
@@ -60,6 +62,10 @@ class Main():
         #Traemos las constantes
         cons = Constants()
 
+        #Mostrar dominios y paises
+        print("Ejemplo de dominios:", cons.DOMINIO)
+        print("Ejemplo de paises:", cons.PAIS)
+
         for line in lines:
             # Quitamos el /n al final del caracter
             line = line[:-1]
@@ -68,7 +74,7 @@ class Main():
             split = re.split(cons.SEPARADOR, line)
 
             correcto = False
-            
+
             if (len(split) == 2):
                 #Verificamos Https y Https
                 correcto = VerificarProtocolo(cons = cons, split = split[0])
@@ -94,15 +100,44 @@ def VerificarDominio(cons, split):
     """
     split2 = re.split(cons.PUNTO, split)
 
-    if(len(split2) == 3):
-        #Verificamos si tenemos el www.
+    #Verificar www.----.com.ar
+    if(len(split2) == 4):
         www = re.fullmatch(cons.WWW, split2[0])
-        com = re.fullmatch(cons.COM, split2[2])
-        return (www != None and com != None)
+        dom = re.fullmatch(cons.DOMINIO, split2[2])
+        pais = re.fullmatch(cons.PAIS, split2[3])
+        return (www and dom and pais) != None
 
+    #Verificar www.---.com y ----.com.ar
+    elif(len(split2) == 3):
+        www = re.fullmatch(cons.WWW, split2[0])
+        pais = re.fullmatch(cons.PAIS, split2[2])
+        
+        if (www != None):
+            dom = re.fullmatch(cons.DOMINIO, split2[2])
+
+            if (dom == None):
+                dom = re.fullmatch(cons.DOMINIOBARRA, split2[2])
+
+            return dom != None
+
+        elif (pais != None):
+            dom = re.fullmatch(cons.DOMINIO, split2[1])
+            return dom != None
+        
+        else:
+            return False
+
+    #Verificar ---.com
     elif(len(split2) == 2):
-        com = re.fullmatch(cons.COM, split2[1])
-        return com != None
+        dom = re.fullmatch(cons.DOMINIO, split2[1])
+
+        if (dom == None):
+            dom = re.fullmatch(cons.DOMINIOBARRA, split2[1])
+
+        return dom != None
+
+    else:
+        return False
 
     
 def VerificarProtocolo(cons, split):

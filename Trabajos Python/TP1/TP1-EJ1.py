@@ -9,7 +9,7 @@ class Constants():
     """Abecedario del Autómata."""
     
     LETRAS = "[A-z]"
-    #SIMBOLOS = "[- | _]"
+    SIMBOLOS = "[$ | # | @ | ! | & | ( | ) | ' | ¿ | ¡]" #Simbolos incorrectos
     NUMEROS = "[0-9]"
     DOMINIOLIST = ["outlook", "hotmail", "gmail", "yahoo", "live"]
     DOMINIOS = "|".join(DOMINIOLIST)
@@ -69,6 +69,7 @@ class Main():
         print("Ejemplo de paises:", cons.PAISES)
 
         for line in lines:
+            #line = line.strip() Para quitar el /n
             # Quitamos el /n al final del caracter
             line = line[:-1]
 
@@ -85,13 +86,17 @@ class Main():
 
                 #Verifico que tiene un solo arroba.
                 if (len(split) == 2):
-                    #Dividimos despues del arroba en dos o tres partes por puntos.
-                    split2 = re.split(cons.PUNTO, split[1])
+                    #Verifico si el nick antes del arroba es correcto
+                    correcto = VerificarNick(cons = cons, split = split[0])
 
-                    if (len(split2) == 2):
-                        correcto = VerificarDominio(len = 2, cons = cons, split = split2)
-                    elif (len(split2) == 3):
-                        correcto = VerificarDominio(len = 3, cons = cons, split = split2)
+                    if (correcto):
+                        #Dividimos despues del arroba en dos o tres partes por puntos.
+                        split2 = re.split(cons.PUNTO, split[1])
+
+                        if (len(split2) == 2):
+                            correcto = VerificarDominio(len = 2, cons = cons, split = split2)
+                        elif (len(split2) == 3):
+                            correcto = VerificarDominio(len = 3, cons = cons, split = split2)
             
             if (correcto == True):
                 print("El correo ingresado es correcto:", line)
@@ -124,6 +129,18 @@ def VerificarDominio(len, cons, split):
             return True
         else:
             return False
+
+def VerificarNick(cons, split):
+    """Verifico si el nombre es correcto.
+
+        args:
+                -cons: Constantes.
+                -split: Dominio en lista. 
+    """
+    if (split[-1] == "."):
+        return False
+
+    return not re.search(cons.SIMBOLOS, split)
 
 
 main = Main()
