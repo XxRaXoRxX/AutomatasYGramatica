@@ -97,6 +97,8 @@ class Main():
                             correcto = VerificarDominio(len = 2, cons = cons, split = split2)
                         elif (len(split2) == 3):
                             correcto = VerificarDominio(len = 3, cons = cons, split = split2)
+                        else:
+                            correcto = False
             
             if (correcto == True):
                 print("El correo ingresado es correcto:", line)
